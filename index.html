@@ -12,14 +12,15 @@
       }
     </style>
     <script>
-      // Polyfill for process.env to prevent ReferenceError in browser environment
-      window.process = {
-        env: {
-          NODE_ENV: 'development',
-          // API_KEY will be injected by the environment if available
-          API_KEY: window.process?.env?.API_KEY || ''
-        }
-      };
+      // Robust Polyfill for process.env to prevent ReferenceError in browser environment
+      // This is critical for the app to load without crashing
+      window.process = window.process || {};
+      window.process.env = window.process.env || {};
+      window.process.env.NODE_ENV = 'development';
+      // Safety check for API_KEY access
+      if (!window.process.env.API_KEY) {
+        window.process.env.API_KEY = ''; 
+      }
     </script>
   <script type="importmap">
 {
@@ -30,8 +31,8 @@
     "react-dom": "https://esm.sh/react-dom@18.2.0?external=react",
     "react-dom/": "https://esm.sh/react-dom@18.2.0/?external=react",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?external=react",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react,react-dom",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?external=react,react-dom",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0?deps=react@18.2.0,react-dom@18.2.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@18.2.0,react-dom@18.2.0",
     "@remix-run/router": "https://esm.sh/@remix-run/router@1.15.3"
   }
 }
