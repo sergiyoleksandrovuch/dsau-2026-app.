@@ -1,0 +1,7 @@
+{
+  "name": "Аграка кличе",
+  "description": "Mobile-first application for applicants to the State Agrarian and Economic University of Dnipro for the 2026 admission campaign.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
