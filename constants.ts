@@ -1,3 +1,4 @@
+
 import { Faculty, DegreeLevel } from './types';
 
 // Social Media Links
@@ -13,10 +14,80 @@ export const ADMISSION_COMMITTEE = {
   email: "vstup@dsau.dp.ua",
   image: "https://drive.google.com/uc?export=view&id=1vaB6BkKhBIKFoAELen1ER3QqERql6u-K", // Converted drive link
   motivation: "Ми — команда професіоналів, яка допоможе тобі зробити перший крок до успішної кар'єри. Твоє майбутнє починається з нами!",
-  team: [
-     { name: "Відповідальний секретар", role: "Організація вступної кампанії" },
-     { name: "Заступник секретаря", role: "Консультація з питань пільг" },
-     { name: "Технічний секретар", role: "Робота з ЄДЕБО" },
+  // Structural Units
+  leadership: [
+    { name: "Анатолій Степанович Кобець", role: "Ректор університету, Голова приймальної комісії", email: "agro@dsau.dp.ua" },
+    { name: "Дмитро Михайлович Онопрієнко", role: "Перший проректор, Заступник голови приймальної комісії", email: "agro@dsau.dp.ua" }
+  ],
+  secretariat: [
+    { name: "Сергій Олександрович Кобернюк", role: "Відповідальний секретар приймальної комісії", email: "koberniuk.s.o@dsau.dp.ua" },
+    { name: "Дмитро Олександрович Тимчак", role: "Заст. відповідального секретаря", email: "tymchak.d.o@dsau.dp.ua" },
+    { name: "Олександр Олександрович Гаврюшенко", role: "Заст. відповідального секретаря", email: "havriushenko.o.o@dsau.dp.ua" },
+    { name: "Ліна Миколаївна Помазан", role: "Провідна фахівчиня з інформаційних технологій", email: "pomazan.l.m@dsau.dp.ua" }
+  ],
+  faculties: [
+    {
+      name: "Агрономічний факультет",
+      members: [
+        { name: "Олександр Олександрович Іжболдін", role: "Голова відбіркової комісії (Декан)", email: "izhboldin.o.o@dsau.dp.ua" },
+        { name: "Інна Вікторівна Лядська", role: "Відповідальна секретарка", email: "liadska.i.v@dsau.dp.ua" },
+        { name: "Ірина Миколаївна Сологуб", role: "Членкиня комісії", email: "sologubira2306@gmail.com" },
+        { name: "Наталія Олексіївна Пришедько", role: "Членкиня комісії", email: "agrozemlerobstvo@gmail.com" }
+      ]
+    },
+    {
+      name: "Інженерно-технологічний факультет",
+      members: [
+        { name: "Андрій Миколайович Пугач", role: "Голова відбіркової комісії (Декан)", email: "anpugach13@gmail.com" },
+        { name: "Наталія Олександрівна Пономаренко", role: "Відповідальна секретарка", email: "nanagieva@ukr.net" },
+        { name: "Діана Петрівна Кротюк", role: "Членкиня комісії", email: "dianakorotuk@gmail.com" },
+        { name: "Аліна Олександрівна Черниченко", role: "Членкиня комісії", email: "" }
+      ]
+    },
+    {
+      name: "Факультет менеджменту і маркетингу",
+      members: [
+        { name: "Лариса Миколаївна Курбацька", role: "Голова відбіркової комісії (Деканеса)", email: "kurbatska.l.m@dsau.dp.ua" },
+        { name: "Сергій Вячеславович Васильєв", role: "Відповідальний секретар", email: "vasyliev.s.v@dsau.dp.ua" },
+        { name: "Юлія Леонідівна Якубенко", role: "Членкиня комісії", email: "yakubenko.yu.l@dsau.dp.ua" },
+        { name: "Олеся Василівна Лебеденко", role: "Членкиня комісії", email: "lebedenko.olesya@i.ua" }
+      ]
+    },
+    {
+      name: "Факультет обліку і фінансів",
+      members: [
+        { name: "Галина Євгеніївна Павлова", role: "Голова відбіркової комісії (Деканеса)", email: "pavlova.h.ye@dsau.dp.ua" },
+        { name: "Анна Юріївна Сірко", role: "Відповідальна секретарка", email: "sirko.a.iu@dsau.dp.ua" },
+        { name: "Олена Володимирівна Лиса", role: "Членкиня комісії", email: "lysaelena@gmail.com" },
+        { name: "Ольга Віталіївна Чернецька", role: "Членкиня комісії", email: "chernetska.o.v@dsau.dp.ua" },
+        { name: "Олена Леонідівна Дубина", role: "Членкиня комісії", email: "dubyna.o.l@dsau.dp.ua" }
+      ]
+    },
+    {
+      name: "Факультет ветеринарної медицини",
+      members: [
+        { name: "Іван Андрійович Бібен", role: "Голова відбіркової комісії (Декан)", email: "biben.i.a@dsau.dp.ua" },
+        { name: "Марта Сергіївна Оржинська", role: "Відповідальна секретарка", email: "marta1990333@gmail.com" },
+        { name: "Олена Іванівна Северіна", role: "Членкиня комісії", email: "elene.severina74@gmail.com" },
+        { name: "Дар’я Сергіївна Замула", role: "Членкиня комісії", email: "dariazamyla2006@gmail.com" }
+      ]
+    },
+    {
+      name: "Біотехнологічний факультет",
+      members: [
+        { name: "Роман Васильович Милостивий", role: "Голова відбіркової комісії (Декан)", email: "mylostyvyi.r.v@dsau.dp.ua" },
+        { name: "Володимир Михайлович Пришедько", role: "Відповідальний секретар", email: "prishedko.v.m@dsau.dp.ua" },
+        { name: "Надія Леонідівна Губанова", role: "Членкиня комісії", email: "nlg2277@gmail.com" }
+      ]
+    },
+    {
+      name: "Факультет водогосподарської інженерії та екології",
+      members: [
+        { name: "Леонід Миколайович Рудаков", role: "Голова відбіркової комісії (Декан)", email: "rudakov.l.m@dsau.dp.ua" },
+        { name: "Вікторія Валеріївна Кацевич", role: "Відповідальна секретарка", email: "katsevych.v.v@dsau.dp.ua" },
+        { name: "Єлизавета Сергіївна Куга", role: "Членкиня комісії", email: "kugaelizaveta@gmail.com" }
+      ]
+    }
   ]
 };
 

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { FacultyList } from './components/FacultyList';
@@ -6,11 +7,11 @@ import { GeminiChat } from './components/GeminiChat';
 import { ScoreCalculator } from './components/ScoreCalculator';
 import { DegreeLevel, UserRegistration } from './types';
 import { PHD_PRICING, SOCIAL_LINKS, ADMISSION_COMMITTEE, PREP_COURSES_CONTACT } from './constants';
-import { Menu, X, GraduationCap, BookOpen, Phone, MapPin, Globe, CheckCircle, Lightbulb, Calendar, Mail, Instagram, ExternalLink, Briefcase, Home, Award, Music, Users, Code, Trophy, Map, MessageCircle } from 'lucide-react';
+import { Menu, X, GraduationCap, BookOpen, Phone, MapPin, Globe, CheckCircle, Lightbulb, Calendar, Mail, Instagram, ExternalLink, Briefcase, Home, Award, Music, Users, Code, Trophy, Map, MessageCircle, Heart, Plane, User, BadgeCheck } from 'lucide-react';
 import { Button } from './components/ui/Button';
 
 // --- Icons wrapper for Tiktok which is not in lucide-react (using generic music icon or SVG) ---
-const TikTokIcon = ({ size = 24, className = "" }) => (
+const TikTokIcon = ({ size = 24, className = "" }: {size?: number, className?: string}) => (
     <svg 
       width={size} 
       height={size} 
@@ -105,7 +106,7 @@ const Footer = () => (
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.1</p>
         </div>
 
         {/* Contacts */}
@@ -153,32 +154,22 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onRegistrationComplete }) => {
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 overflow-hidden">
              {/* Hero Section with Split Background */}
-            <div className="fixed inset-0 z-0">
-                {/* Left Side Background - Agri */}
-                <div className="absolute top-0 left-0 w-1/2 h-full bg-cover bg-left" 
+            <div className="fixed inset-0 z-0 flex">
+                {/* Background - Wheat Field */}
+                <div className="w-full h-full bg-cover bg-center relative overflow-hidden" 
                     style={{ 
-                    backgroundImage: "url('https://images.unsplash.com/photo-1625246333195-5848c4282704?q=80&w=1000&auto=format&fit=crop')",
-                    filter: "grayscale(30%) contrast(110%) brightness(0.9)"
+                    backgroundImage: "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop')",
                     }}>
-                <div className="absolute inset-0 bg-yellow-500/80 mix-blend-multiply"></div>
+                    {/* Warm overlay */}
+                    <div className="absolute inset-0 bg-yellow-500/20 mix-blend-overlay"></div>
+                    {/* Gradient for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/60"></div>
                 </div>
-
-                {/* Right Side Background - Econ */}
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-right" 
-                    style={{ 
-                    backgroundImage: "url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop')",
-                    filter: "grayscale(30%) contrast(110%) brightness(0.9)"
-                    }}>
-                <div className="absolute inset-0 bg-blue-900/80 mix-blend-multiply"></div>
-                </div>
-                
-                {/* Overlay to unify */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80 z-0"></div>
             </div>
 
-            <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
+            <div className="relative z-20 w-full max-w-4xl mx-auto flex flex-col items-center">
                 <div className="text-center mb-10 animate-in fade-in zoom-in duration-700">
                     <div className="inline-block mb-6 p-3 px-6 bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-lg">
                         <span className="font-bold tracking-widest uppercase text-sm text-yellow-300 drop-shadow-md">Вступна кампанія 2026</span>
@@ -191,7 +182,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onRegistrationComplete }) => 
                     </p>
                 </div>
                 
-                <div className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom-8 duration-700 delay-200">
+                <div className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom-8 duration-700 delay-200 border-t-4 border-yellow-500">
                     <RegistrationForm onComplete={onRegistrationComplete} />
                 </div>
             </div>
@@ -424,83 +415,120 @@ const AdmissionPage = () => {
 
 const AdmissionCommitteePage = () => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-       <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-           <div className="md:flex">
-               {/* Photo Section */}
-               <div className="md:w-1/2 relative h-64 md:h-auto">
-                   <img 
-                     src={ADMISSION_COMMITTEE.image} 
-                     alt="Приймальна комісія" 
-                     className="w-full h-full object-cover"
-                     onError={(e) => {
-                       // Fallback if google drive link fails
-                       e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop";
-                     }}
-                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                       <p className="text-white font-bold text-xl italic leading-relaxed drop-shadow-md">
-                          "{ADMISSION_COMMITTEE.motivation}"
-                       </p>
-                   </div>
-               </div>
-               
-               {/* Contact Section */}
-               <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-gray-50">
-                   <h2 className="text-3xl font-black text-gray-800 mb-6 flex items-center gap-3">
-                       <Users className="text-yellow-600" size={32} />
-                       Приймальна комісія
-                   </h2>
-                   
-                   <div className="space-y-6 mb-8">
-                       <div className="flex items-start gap-4">
-                           <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 shrink-0">
-                               <Phone size={20} />
-                           </div>
-                           <div>
-                               <p className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Телефони</p>
-                               {ADMISSION_COMMITTEE.phones.map(phone => (
-                                   <a key={phone} href={`tel:${phone}`} className="block text-lg font-bold text-gray-800 hover:text-yellow-600 transition-colors">
-                                       {phone}
-                                   </a>
-                               ))}
-                           </div>
-                       </div>
-                       
-                       <div className="flex items-start gap-4">
-                           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
-                               <Mail size={20} />
-                           </div>
-                           <div>
-                               <p className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Email</p>
-                               <a href={`mailto:${ADMISSION_COMMITTEE.email}`} className="block text-lg font-bold text-gray-800 hover:text-yellow-600 transition-colors">
-                                   {ADMISSION_COMMITTEE.email}
-                               </a>
-                           </div>
-                       </div>
-                   </div>
+    <div className="max-w-5xl mx-auto px-4 py-12">
+       <div className="text-center mb-10">
+           <h1 className="text-4xl font-black text-gray-800 mb-4 flex items-center justify-center gap-3">
+               <Users className="text-yellow-500" size={40} />
+               Приймальна комісія
+           </h1>
+           <p className="text-gray-500 max-w-2xl mx-auto">
+               Команда професіоналів, яка забезпечує прозорий та комфортний вступ до університету.
+           </p>
+       </div>
 
-                   <Button className="w-full justify-center gap-2">
-                       <MessageCircle size={18} />
-                       Написати нам
-                   </Button>
+       {/* Hero Photo & Motivation */}
+       <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 mb-12">
+           <div className="relative h-64 md:h-96">
+               <img 
+                 src={ADMISSION_COMMITTEE.image} 
+                 alt="Команда приймальної комісії" 
+                 className="w-full h-full object-cover"
+                 onError={(e) => {
+                   e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop";
+                 }}
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center p-8">
+                   <p className="text-white font-bold text-xl md:text-2xl italic text-center drop-shadow-lg max-w-3xl">
+                      "{ADMISSION_COMMITTEE.motivation}"
+                   </p>
                </div>
            </div>
+           
+           {/* General Contact Info Bar */}
+           <div className="bg-gray-900 text-white p-6 grid md:grid-cols-3 gap-6 text-center">
+               <div className="flex flex-col items-center">
+                   <Phone className="text-yellow-500 mb-2" size={24} />
+                   <p className="font-bold">Гаряча лінія</p>
+                   {ADMISSION_COMMITTEE.phones.map(p => <a key={p} href={`tel:${p}`} className="text-gray-300 hover:text-white block">{p}</a>)}
+               </div>
+               <div className="flex flex-col items-center">
+                   <Mail className="text-yellow-500 mb-2" size={24} />
+                   <p className="font-bold">Електронна пошта</p>
+                   <a href={`mailto:${ADMISSION_COMMITTEE.email}`} className="text-gray-300 hover:text-white">{ADMISSION_COMMITTEE.email}</a>
+               </div>
+                <div className="flex flex-col items-center">
+                   <MapPin className="text-yellow-500 mb-2" size={24} />
+                   <p className="font-bold">Адреса</p>
+                   <p className="text-gray-300">м. Дніпро, вул. С. Єфремова, 25</p>
+               </div>
+           </div>
+       </div>
 
-           {/* Team Grid */}
-           <div className="p-8 md:p-12 border-t border-gray-100 bg-white">
-               <h3 className="text-xl font-bold text-gray-800 mb-6">Наша команда</h3>
-               <div className="grid md:grid-cols-3 gap-6">
-                   {ADMISSION_COMMITTEE.team.map((member, idx) => (
-                       <div key={idx} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                           <p className="font-bold text-gray-800">{member.name}</p>
-                           <p className="text-sm text-yellow-600">{member.role}</p>
+       {/* Leadership & Secretariat */}
+       <div className="grid md:grid-cols-2 gap-8 mb-16">
+           {/* Leadership */}
+           <div className="bg-yellow-50 rounded-2xl p-8 border border-yellow-200">
+               <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                   <BadgeCheck className="text-yellow-600" /> Керівництво
+               </h2>
+               <div className="space-y-6">
+                   {ADMISSION_COMMITTEE.leadership.map((person, idx) => (
+                       <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-yellow-100 flex items-start gap-4">
+                           <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center shrink-0">
+                               <User size={24} className="text-gray-500" />
+                           </div>
+                           <div>
+                               <p className="font-bold text-gray-800 text-lg">{person.name}</p>
+                               <p className="text-sm text-yellow-700 font-medium mb-1">{person.role}</p>
+                               <a href={`mailto:${person.email}`} className="text-xs text-gray-500 hover:text-yellow-600">{person.email}</a>
+                           </div>
                        </div>
                    ))}
                </div>
-               <p className="text-xs text-gray-400 mt-6 text-center italic">
-                   Ми працюємо для того, щоб ваш вступ був максимально комфортним та прозорим.
-               </p>
+           </div>
+
+           {/* Secretariat */}
+           <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+               <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                   <Briefcase className="text-gray-600" /> Секретаріат
+               </h2>
+               <div className="space-y-4">
+                   {ADMISSION_COMMITTEE.secretariat.map((person, idx) => (
+                       <div key={idx} className="flex items-start gap-3 pb-4 border-b border-gray-50 last:border-0 last:pb-0">
+                           <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center shrink-0">
+                               <User size={20} className="text-gray-400" />
+                           </div>
+                           <div>
+                               <p className="font-bold text-gray-800">{person.name}</p>
+                               <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">{person.role}</p>
+                               <a href={`mailto:${person.email}`} className="text-sm text-blue-600 hover:underline">{person.email}</a>
+                           </div>
+                       </div>
+                   ))}
+               </div>
+           </div>
+       </div>
+
+       {/* Faculty Selection Commissions */}
+       <div>
+           <h2 className="text-3xl font-black text-gray-800 mb-8 text-center">Відбіркові комісії факультетів</h2>
+           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {ADMISSION_COMMITTEE.faculties.map((faculty, idx) => (
+                   <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-100 hover:border-yellow-300 transition-all p-6 flex flex-col">
+                       <h3 className="font-bold text-lg text-gray-800 mb-4 pb-2 border-b border-gray-100 h-14 flex items-center">
+                           {faculty.name}
+                       </h3>
+                       <div className="space-y-4 flex-1">
+                           {faculty.members.map((member, mIdx) => (
+                               <div key={mIdx}>
+                                   <p className="font-semibold text-gray-700 text-sm">{member.name}</p>
+                                   <p className="text-xs text-gray-500">{member.role}</p>
+                                   {member.email && <a href={`mailto:${member.email}`} className="text-xs text-blue-500 hover:underline">{member.email}</a>}
+                               </div>
+                           ))}
+                       </div>
+                   </div>
+               ))}
            </div>
        </div>
     </div>
@@ -681,152 +709,137 @@ const ImportantPage = () => (
     </section>
 
     {/* International */}
-    <section className="grid md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group hover:border-green-200 transition-all">
+    <section className="grid md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group hover:border-purple-200 transition-all">
       <div className="rounded-2xl overflow-hidden shadow-md h-64 md:h-80 relative">
-         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" alt="International Students" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" alt="International Cooperation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
       </div>
       <div>
-         <div className="flex items-center gap-2 mb-3">
-             <div className="p-2 bg-green-100 text-green-600 rounded-lg"><Globe size={20} /></div>
-             <h2 className="text-2xl font-bold text-gray-800">Міжнародні програми</h2>
+        <div className="flex items-center gap-2 mb-3">
+             <div className="p-2 bg-purple-100 text-purple-600 rounded-lg"><Globe size={20} /></div>
+             <h2 className="text-2xl font-bold text-gray-800">Міжнародна діяльність</h2>
         </div>
-        <p className="text-gray-600 mb-6 leading-relaxed">
-          Світ відкритий для тебе! Університет має партнерські угоди з закладами Франції, Німеччини, Польщі та США.
+        <p className="text-gray-600 mb-4 leading-relaxed">
+          Університет співпрацює з 30+ закордонними партнерами. Студенти мають можливість проходити стажування у Франції, Німеччині, Польщі та інших країнах ЄС.
         </p>
-         <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-green-50 text-green-700 text-sm font-semibold rounded-full border border-green-100">Erasmus+</span>
-            <span className="px-3 py-1 bg-green-50 text-green-700 text-sm font-semibold rounded-full border border-green-100">DAAD</span>
-            <span className="px-3 py-1 bg-green-50 text-green-700 text-sm font-semibold rounded-full border border-green-100">Подвійні дипломи</span>
-         </div>
+        <ul className="space-y-3">
+            <li className="flex gap-3 text-sm text-gray-700"><CheckCircle size={18} className="text-purple-500 shrink-0"/> Програми подвійних дипломів</li>
+            <li className="flex gap-3 text-sm text-gray-700"><CheckCircle size={18} className="text-purple-500 shrink-0"/> Літні школи за кордоном</li>
+            <li className="flex gap-3 text-sm text-gray-700"><CheckCircle size={18} className="text-purple-500 shrink-0"/> Erasmus+ гранти</li>
+        </ul>
       </div>
     </section>
 
-     {/* Employment */}
-    <section className="bg-gradient-to-br from-gray-900 to-gray-800 p-8 md:p-12 rounded-3xl shadow-xl text-white text-center">
-        <h2 className="text-3xl font-bold mb-4">Працевлаштування</h2>
-        <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-            95% наших випускників знаходять роботу за фахом протягом перших 6 місяців після завершення навчання. Центр кар'єри ДДАЕУ допомагає зі складанням резюме та пошуком вакансій.
-        </p>
-        <Button className="bg-yellow-500 hover:bg-yellow-600 text-white border-none">Зв'язатися з Центром кар'єри</Button>
+    {/* Employment */}
+    <section className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-8 md:p-12 rounded-3xl shadow-xl text-center md:text-left flex flex-col md:flex-row items-center gap-8">
+        <div className="flex-1">
+             <h2 className="text-2xl font-bold mb-4 flex items-center justify-center md:justify-start gap-3">
+                <Briefcase size={28} className="text-yellow-500"/> Працевлаштування
+             </h2>
+             <p className="text-gray-300 mb-6">
+                90% наших випускників знаходять роботу за фахом протягом першого року після випуску. Центр кар'єри університету допомагає зі складанням резюме та пошуком вакансій.
+             </p>
+             <Button className="bg-yellow-500 text-white border-none hover:bg-yellow-600">Переглянути вакансії партнерів</Button>
+        </div>
+        <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center border-4 border-yellow-500/30">
+            <div className="text-center">
+                <span className="block text-3xl font-black text-yellow-500">90%</span>
+                <span className="text-xs text-gray-300 font-bold uppercase">Успіху</span>
+            </div>
+        </div>
     </section>
   </div>
 );
 
-const StudentLifePage = () => (
-    <div className="max-w-5xl mx-auto px-4 py-12">
-        <div className="text-center mb-16">
-            <span className="font-bold text-yellow-600 uppercase tracking-widest text-xs mb-2 block">Більше ніж навчання</span>
-            <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-6">Студентське життя</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Час розкрити свої таланти! В університеті створені всі умови для творчого, спортивного та наукового розвитку.
+const StudentLifePage = () => {
+  const cards = [
+     { title: "Гранти та конкурси", icon: <Trophy size={24}/>, color: "bg-yellow-100 text-yellow-600", desc: "Стипендіальні програми та наукові гранти для активних студентів." },
+     { title: "Спорт", icon: <Award size={24}/>, color: "bg-blue-100 text-blue-600", desc: "15 спортивних секцій: від футболу до кіберспорту. Сучасний спорткомплекс." },
+     { title: "Самоврядування", icon: <Users size={24}/>, color: "bg-purple-100 text-purple-600", desc: "Студентська рада, яка реально впливає на життя університету." },
+     { title: "Творчість", icon: <Music size={24}/>, color: "bg-pink-100 text-pink-600", desc: "Вокальні та танцювальні колективи, КВК, театральна студія." },
+     { title: "Хакатони", icon: <Code size={24}/>, color: "bg-green-100 text-green-600", desc: "Змагання IT-талантів та інженерні челенджі." },
+     { title: "Дозвілля", icon: <Heart size={24}/>, color: "bg-red-100 text-red-600", desc: "Кіноклуби, квести, вечірки та екскурсії Україною." },
+  ];
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+            <h1 className="text-4xl font-black text-gray-800 mb-4">Студентське життя</h1>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+                ДДАЕУ — це простір твоїх можливостей. Навчання — це лише початок!
             </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-            {/* Grants */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mb-6">
-                    <Award size={32} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cards.map((card, idx) => (
+                <div key={idx} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                    <div className={`w-14 h-14 ${card.color} rounded-2xl flex items-center justify-center mb-6 shadow-sm`}>
+                        {card.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">{card.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{card.desc}</p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Гранти та Конкурси</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    Студенти постійно беруть участь у наукових конкурсах, стартап-батлах та отримують іменні стипендії за досягнення.
-                </p>
-            </div>
+            ))}
+        </div>
 
-            {/* Sport */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mb-6">
-                    <Trophy size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Спорт</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    Власні спортивні зали, секції з волейболу, футболу, вільної боротьби та важкої атлетики. Будь у формі!
-                </p>
+        {/* Gallery Preview (Static for now) */}
+        <div className="mt-16 bg-white rounded-3xl p-8 shadow-xl border border-gray-100 overflow-hidden relative">
+            <div className="text-center mb-8 relative z-10">
+                <h2 className="text-2xl font-bold text-gray-800">Галерея емоцій</h2>
+                <p className="text-gray-500 text-sm">Наші студенти — найяскравіші!</p>
             </div>
-
-            {/* Self-Governance */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
-                    <Users size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Самоврядування</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    Студентська рада реально впливає на життя університету. Це школа лідерства та менеджменту.
-                </p>
-            </div>
-
-             {/* Hackathons */}
-             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                    <Code size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Хакатони</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    Регулярні заходи для ІТ та агро-інженерних спеціальностей. Створюй проекти, що змінюють світ.
-                </p>
-            </div>
-
-            {/* Festivals */}
-             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6">
-                    <Music size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Фестивалі</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    "Студентська весна", "Міс та Містер ДДАЕУ", КВК. Творче життя вирує цілий рік!
-                </p>
-            </div>
-
-            {/* Leisure */}
-             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6">
-                    <ExternalLink size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Дозвілля</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                    Кіновечори, настільні ігри, екскурсії містом та подорожі Україною разом з профкомом.
-                </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-80 hover:opacity-100 transition-opacity">
+                 {[1,2,3,4].map(i => (
+                     <div key={i} className="rounded-xl overflow-hidden h-40 bg-gray-200">
+                         <img src={`https://images.unsplash.com/photo-${i === 1 ? '1523580494863-6f3031224c94' : i === 2 ? '1511632765486-a01980968fc3' : i === 3 ? '1509062522246-3755977927d7' : '1529333441289-385001552207'}?q=80&w=400&auto=format&fit=crop`} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"/>
+                     </div>
+                 ))}
             </div>
         </div>
     </div>
-);
+  );
+};
 
-const App = () => {
-  const [registeredUser, setRegisteredUser] = useState<UserRegistration | null>(null);
 
-  if (!registeredUser) {
-      return (
-          <>
-            <LandingPage onRegistrationComplete={setRegisteredUser} />
-            {/* We can still include the chat for help during registration */}
-            <GeminiChat /> 
-          </>
-      );
-  }
+// --- Main App Component ---
+
+function App() {
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  const handleRegistrationComplete = (data: UserRegistration) => {
+    // In a real app, send data to backend API here
+    console.log("Registered:", data);
+    setIsRegistered(true);
+    // Optionally save to localStorage
+    // localStorage.setItem('dsau_user', JSON.stringify(data));
+  };
 
   return (
     <HashRouter>
-      <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/faculties" element={<FacultiesPage />} />
-            <Route path="/admission" element={<AdmissionPage />} />
-            <Route path="/committee" element={<AdmissionCommitteePage />} />
-            <Route path="/courses" element={<CoursesPage />} />
-            <Route path="/important" element={<ImportantPage />} />
-            <Route path="/student-life" element={<StudentLifePage />} />
-            {/* Catch-all route to redirect back home if something breaks */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        <GeminiChat />
-        <Footer />
+      <div className="min-h-screen bg-gray-50 flex flex-col font-sans text-gray-800">
+        {!isRegistered ? (
+             <LandingPage onRegistrationComplete={handleRegistrationComplete} />
+        ) : (
+          <>
+            <Header />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/faculties" element={<FacultiesPage />} />
+                <Route path="/admission" element={<AdmissionPage />} />
+                <Route path="/committee" element={<AdmissionCommitteePage />} />
+                <Route path="/courses" element={<CoursesPage />} />
+                <Route path="/important" element={<ImportantPage />} />
+                <Route path="/student-life" element={<StudentLifePage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+            <Footer />
+            <GeminiChat />
+          </>
+        )}
       </div>
     </HashRouter>
   );
-};
+}
 
 export default App;

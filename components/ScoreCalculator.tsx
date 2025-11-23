@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BACHELOR_DATA, getCoefficientsForFaculty, SUBJECTS } from '../constants';
 import { Button } from './ui/Button';
-import { Calculator, RefreshCw, AlertCircle } from 'lucide-react';
+import { Calculator, AlertCircle } from 'lucide-react';
 
 export const ScoreCalculator: React.FC = () => {
   const [facultyId, setFacultyId] = useState(BACHELOR_DATA[0].id);
@@ -37,8 +37,6 @@ export const ScoreCalculator: React.FC = () => {
     const k4_max = coefficients.k4_max;
     
     // Formula: (K1*P1 + K2*P2 + K3*P3 + K4*P4) / (K1 + K2 + K3 + (K4max + K4)/2) + OU
-    // Note: Assuming KT (Creative Contest) is 0 for these specialties.
-
     const numerator = (k1 * scores.p1) + (k2 * scores.p2) + (k3 * scores.p3) + (k4 * scores.p4);
     
     // The specific denominator formula requested
@@ -46,13 +44,9 @@ export const ScoreCalculator: React.FC = () => {
 
     let kb = (numerator / denominator) + ou;
 
-    // Apply standard multipliers (GK, RK) if they are meant to be applied *after* the base calculation
-    // Usually GK (1.02) and RK (1.04) are multipliers. 
-    // However, the user prompt asked to "optionally add possibility to consider GK, RK".
-    // Typically: Final = KB * GK * RK.
-    
+    // Apply standard multipliers (GK, RK)
     if (hasSectoralCoeff) kb *= 1.02; // Typical GK
-    if (hasRegionalCoeff) kb *= 1.04; // Typical RK for Dnipro (sometimes 1.07 or 1.02 depending on year, sticking to 1.04 as common)
+    if (hasRegionalCoeff) kb *= 1.04; // Typical RK for Dnipro
 
     // Cap at 200
     if (kb > 200) kb = 200;
