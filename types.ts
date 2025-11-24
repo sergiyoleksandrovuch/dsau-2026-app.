@@ -1,3 +1,4 @@
+
 export enum DegreeLevel {
   BACHELOR = 'Бакалавр',
   MASTER = 'Магістр',

@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { SYSTEM_INSTRUCTION } from '../constants';
-import { MessageCircle, X, Send, Bot, User, Phone, CheckCircle } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Phone, CheckCircle } from 'lucide-react';
 import { Button } from './ui/Button';
 
 // REPLACE THIS WITH YOUR MAKE.COM OR ZAPIER WEBHOOK URL
@@ -29,8 +29,15 @@ export const GeminiChat: React.FC = () => {
 
   useEffect(scrollToBottom, [messages, showLeadForm]);
 
+  // Safe access to API Key
+  const getApiKey = () => {
+    // @ts-ignore
+    return window.process?.env?.API_KEY || '';
+  };
+
   const handleSend = async () => {
-    if (!input.trim() || !process.env.API_KEY) return;
+    const apiKey = getApiKey();
+    if (!input.trim() || !apiKey) return;
 
     const userMessage = input;
     setInput('');
@@ -38,7 +45,7 @@ export const GeminiChat: React.FC = () => {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: apiKey });
       const model = 'gemini-2.5-flash';
 
       const chat = ai.chats.create({
@@ -98,7 +105,8 @@ export const GeminiChat: React.FC = () => {
     }, 2000);
   };
 
-  if (!process.env.API_KEY) return null;
+  const apiKey = getApiKey();
+  if (!apiKey) return null;
 
   return (
     <>
