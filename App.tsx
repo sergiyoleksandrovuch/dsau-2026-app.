@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { FacultyList } from './components/FacultyList';
@@ -105,7 +106,7 @@ const Footer = () => (
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.6</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.8</p>
         </div>
 
         {/* Contacts */}
@@ -363,7 +364,7 @@ const AdmissionPage = () => {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-black text-gray-800 mb-4">Вступна кампанія 2026</h1>
         <p className="text-gray-500 max-w-2xl mx-auto">
-          Все, що потрібно знати для успішного вступу до Дніпровського державного аграрно-економічного університету.
+          Все, що потрібно знати для успішного вступу до Дніпровського державного аграрно-економічний університет.
         </p>
       </div>
 

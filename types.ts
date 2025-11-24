@@ -8,6 +8,7 @@ export enum DegreeLevel {
 export enum EducationBase {
   SECONDARY = 'Повна загальна середня освіта',
   NQF5 = 'НРК5 (Фаховий молодший бакалавр)',
+  BACHELOR = 'Бакалавр',
   SPECIALIST = 'Спеціаліст',
   MASTER = 'Магістр'
 }
