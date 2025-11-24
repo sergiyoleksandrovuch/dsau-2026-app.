@@ -22,7 +22,7 @@ export interface Faculty {
   id: string;
   name: string;
   description?: string;
-  image?: string; // New field for faculty image
+  image?: string;
   specialties: Specialty[];
   email?: string;
   phone?: string;
