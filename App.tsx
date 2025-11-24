@@ -50,7 +50,9 @@ const Header = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center gap-2 text-yellow-600 font-bold text-xl hover:opacity-80 transition-opacity">
-            <GraduationCap size={32} strokeWidth={2.5} />
+            {/* Use local logo if available, otherwise fallback icon */}
+            <img src="/images/logo.jpg" alt="Logo" className="w-10 h-10 object-contain" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
+            <GraduationCap size={32} strokeWidth={2.5} className="hidden" />
             <span className="tracking-tight text-gray-800">ДДАЕУ <span className="text-yellow-600">ВСТУП</span></span>
           </Link>
 
@@ -102,11 +104,12 @@ const Footer = () => (
         {/* Info */}
         <div className="text-center md:text-left space-y-4">
            <h3 className="text-white font-bold text-2xl mb-2 flex items-center justify-center md:justify-start gap-3">
-            <GraduationCap size={32} className="text-yellow-500" />
+            <img src="/images/logo.jpg" alt="Logo" className="w-10 h-10 object-contain grayscale brightness-200" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
+            <GraduationCap size={32} className="text-yellow-500 hidden" />
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.8</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.13</p>
         </div>
 
         {/* Contacts */}
@@ -313,7 +316,7 @@ const FacultiesPage = () => {
           <button
             key={level}
             onClick={() => setActiveTab(level)}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activeTab === level ? 'bg-yellow-500 text-white shadow-md transform scale-105' : 'bg-transparent text-gray-600 hover:bg-gray-200'}`}
+            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activeTab === level ? 'bg-yellow-50 text-yellow-500 text-white shadow-md transform scale-105' : 'bg-transparent text-gray-600 hover:bg-gray-200'}`}
           >
             {level}
           </button>

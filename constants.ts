@@ -12,7 +12,7 @@ export const SOCIAL_LINKS = {
 export const ADMISSION_COMMITTEE = {
   phones: ["098 837 31 31", "050 837 31 31"],
   email: "vstup@dsau.dp.ua",
-  image: "https://drive.google.com/uc?export=view&id=1vaB6BkKhBIKFoAELen1ER3QqERql6u-K", // Converted drive link
+  image: "/images/team.jpg", // Updated to local file
   motivation: "Ми — команда професіоналів, яка допоможе тобі зробити перший крок до успішної кар'єри. Твоє майбутнє починається з нами!",
   // Structural Units
   leadership: [
@@ -95,7 +95,7 @@ export const ADMISSION_COMMITTEE = {
 export const PREP_COURSES_CONTACT = {
   name: "Олександр Гаврюшенко",
   phone: "098 371 73 09",
-  image: "https://drive.google.com/uc?export=view&id=1IkaGIdUCR_ASe1JAAKH4LHiV1nFoX8gX" // Converted drive link
+  image: "/images/gavrusenko.jpg" // Updated to local file
 };
 
 // Bachelor Pricing Data
