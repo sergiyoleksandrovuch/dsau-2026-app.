@@ -12,7 +12,7 @@ export const SOCIAL_LINKS = {
 export const ADMISSION_COMMITTEE = {
   phones: ["098 837 31 31", "050 837 31 31"],
   email: "vstup@dsau.dp.ua",
-  image: "/images/team.jpg", // Updated to local file
+  image: "https://i.postimg.cc/WpWhJ6F3/team.jpg", 
   motivation: "Ми — команда професіоналів, яка допоможе тобі зробити перший крок до успішної кар'єри. Твоє майбутнє починається з нами!",
   // Structural Units
   leadership: [
@@ -95,7 +95,7 @@ export const ADMISSION_COMMITTEE = {
 export const PREP_COURSES_CONTACT = {
   name: "Олександр Гаврюшенко",
   phone: "098 371 73 09",
-  image: "/images/gavrusenko.jpg" // Updated to local file
+  image: "https://i.postimg.cc/0jBjRPRF/gavrusenko.jpg"
 };
 
 // Bachelor Pricing Data
@@ -103,7 +103,7 @@ export const BACHELOR_DATA: Faculty[] = [
   {
     id: 'agro',
     name: 'Агрономічний факультет',
-    image: 'https://images.unsplash.com/photo-1605000797499-95a053545e21?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/jq6dzp8M/agrofac.png',
     email: 'agrof@dsau.dp.ua',
     phone: '(050) 032-89-82',
     description: 'Декан: доц. Іжболдін Олександр Олександрович',
@@ -115,7 +115,7 @@ export const BACHELOR_DATA: Faculty[] = [
   {
     id: 'bio',
     name: 'Біотехнологічний факультет',
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/P56rc1Ys/BTF.png',
     email: 'btf@dsau.dp.ua',
     phone: '(097) 280-88-19',
     description: 'Декан: доц. Милостивий Роман Васильович',
@@ -127,7 +127,7 @@ export const BACHELOR_DATA: Faculty[] = [
   {
     id: 'eng',
     name: 'Інженерно-технологічний факультет',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/CLmh2jpD/ITF.png',
     email: 'anpugach13@gmail.com',
     phone: '(066) 554-08-36',
     description: 'Декан: проф. Пугач Андрій Миколайович',
@@ -139,7 +139,7 @@ export const BACHELOR_DATA: Faculty[] = [
   {
     id: 'water',
     name: 'Факультет водогосподарської інженерії та екології',
-    image: 'https://images.unsplash.com/photo-1468422080047-94935d922ca7?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/qqHsWPy4/gidrofak.png',
     email: 'gidrof@dsau.dp.ua',
     phone: '(067) 142-79-44',
     description: 'Декан: доц. Рудаков Леонід Миколайович',
@@ -182,7 +182,7 @@ export const MASTER_DATA: Faculty[] = [
   {
     id: 'agro',
     name: 'Агрономічний факультет',
-    image: 'https://images.unsplash.com/photo-1605000797499-95a053545e21?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/jq6dzp8M/agrofac.png',
     email: 'agrof@dsau.dp.ua',
     phone: '(050) 032-89-82',
     description: 'Декан: доц. Іжболдін Олександр Олександрович',
@@ -194,7 +194,7 @@ export const MASTER_DATA: Faculty[] = [
   {
     id: 'bio',
     name: 'Біотехнологічний факультет',
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/P56rc1Ys/BTF.png',
     email: 'btf@dsau.dp.ua',
     phone: '(097) 280-88-19',
     description: 'Декан: доц. Милостивий Роман Васильович',
@@ -206,7 +206,7 @@ export const MASTER_DATA: Faculty[] = [
   {
     id: 'eng',
     name: 'Інженерно-технологічний факультет',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/CLmh2jpD/ITF.png',
     email: 'anpugach13@gmail.com',
     phone: '(066) 554-08-36',
     description: 'Декан: проф. Пугач Андрій Миколайович',
@@ -218,7 +218,7 @@ export const MASTER_DATA: Faculty[] = [
   {
     id: 'vet',
     name: 'Факультет ветеринарної медицини',
-    image: 'https://images.unsplash.com/photo-1628009368231-760335298025?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/D0Y2STgN/vetfac.png',
     email: 'vetf@dsau.dp.ua',
     phone: '(050) 453-23-21',
     description: 'Декан: доц. Бібен Іван Андрійович',
@@ -229,7 +229,7 @@ export const MASTER_DATA: Faculty[] = [
   {
     id: 'water',
     name: 'Факультет водогосподарської інженерії та екології',
-    image: 'https://images.unsplash.com/photo-1468422080047-94935d922ca7?q=80&w=800&auto=format&fit=crop',
+    image: 'https://i.postimg.cc/qqHsWPy4/gidrofak.png',
     email: 'gidrof@dsau.dp.ua',
     phone: '(067) 142-79-44',
     description: 'Декан: доц. Рудаков Леонід Миколайович',

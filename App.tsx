@@ -50,8 +50,8 @@ const Header = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center gap-2 text-yellow-600 font-bold text-xl hover:opacity-80 transition-opacity">
-            {/* Use local logo if available, otherwise fallback icon */}
-            <img src="/images/logo.jpg" alt="Logo" className="w-10 h-10 object-contain" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
+            {/* Use direct Postimages link for Logo */}
+            <img src="https://i.postimg.cc/rsPsXMXJ/logo.jpg" alt="Logo" className="w-10 h-10 object-contain" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
             <GraduationCap size={32} strokeWidth={2.5} className="hidden" />
             <span className="tracking-tight text-gray-800">ДДАЕУ <span className="text-yellow-600">ВСТУП</span></span>
           </Link>
@@ -104,12 +104,12 @@ const Footer = () => (
         {/* Info */}
         <div className="text-center md:text-left space-y-4">
            <h3 className="text-white font-bold text-2xl mb-2 flex items-center justify-center md:justify-start gap-3">
-            <img src="/images/logo.jpg" alt="Logo" className="w-10 h-10 object-contain grayscale brightness-200" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
+            <img src="https://i.postimg.cc/rsPsXMXJ/logo.jpg" alt="Logo" className="w-10 h-10 object-contain grayscale brightness-200" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling?.classList.remove('hidden')}} />
             <GraduationCap size={32} className="text-yellow-500 hidden" />
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.13</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.28</p>
         </div>
 
         {/* Contacts */}
@@ -437,7 +437,8 @@ const AdmissionCommitteePage = () => {
                  alt="Команда приймальної комісії" 
                  className="w-full h-full object-cover"
                  onError={(e) => {
-                   e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop";
+                   // Fallback if local image fails
+                   e.currentTarget.src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop";
                  }}
                />
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center p-8">
@@ -564,7 +565,8 @@ const CoursesPage = () => {
                        alt={PREP_COURSES_CONTACT.name} 
                        className="w-full h-full object-cover"
                        onError={(e) => {
-                           e.currentTarget.src = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop";
+                           // Fallback to Unsplash
+                           e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop";
                        }}
                      />
                  </div>
@@ -667,7 +669,7 @@ const ImportantPage = () => (
     <section className="grid md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-lg border border-gray-100 group hover:border-yellow-200 transition-all">
       <div className="rounded-2xl overflow-hidden shadow-md h-64 md:h-80 relative">
          <div className="absolute inset-0 bg-yellow-500/10 group-hover:bg-transparent transition-colors z-10"></div>
-         <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000&auto=format&fit=crop" alt="Dormitory" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+         <img src="https://i.postimg.cc/kGybzB7K/gurtojitok.jpg" alt="Dormitory" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
       </div>
       <div>
         <div className="flex items-center gap-2 mb-3">
