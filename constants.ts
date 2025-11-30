@@ -1,4 +1,3 @@
-
 import { Faculty, DegreeLevel } from './types';
 
 // Social Media Links

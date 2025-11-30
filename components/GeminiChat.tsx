@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { SYSTEM_INSTRUCTION } from '../constants';
@@ -29,14 +28,8 @@ export const GeminiChat: React.FC = () => {
 
   useEffect(scrollToBottom, [messages, showLeadForm]);
 
-  // Safe access to API Key
-  const getApiKey = () => {
-    // @ts-ignore
-    return window.process?.env?.API_KEY || '';
-  };
-
   const handleSend = async () => {
-    const apiKey = getApiKey();
+    const apiKey = process.env.API_KEY;
     if (!input.trim() || !apiKey) return;
 
     const userMessage = input;
@@ -105,8 +98,7 @@ export const GeminiChat: React.FC = () => {
     }, 2000);
   };
 
-  const apiKey = getApiKey();
-  if (!apiKey) return null;
+  if (!process.env.API_KEY) return null;
 
   return (
     <>
