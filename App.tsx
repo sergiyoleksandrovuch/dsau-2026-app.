@@ -109,7 +109,7 @@ const Footer = () => (
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.34</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.36</p>
         </div>
 
         {/* Contacts */}
