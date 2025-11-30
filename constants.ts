@@ -91,6 +91,21 @@ export const ADMISSION_COMMITTEE = {
   ]
 };
 
+export const PHD_CONTACT = {
+  phone: "(097) 697-89-20",
+  email: "vpank@dsau.dp.ua",
+  head: {
+    name: "Олександр Сергійович Ткаченко",
+    role: "Завідувач відділу аспірантури",
+    image: "https://i.postimg.cc/W1N49Sdx/tkachenko_o_s.png"
+  },
+  specialist: {
+    name: "Анастасія Олександрівна Бойчук",
+    role: "Провідна фахівчиня",
+    image: "https://i.postimg.cc/x1fdsgXW/boychuk-a-o.png"
+  }
+};
+
 // Preparatory Courses Contact
 export const PREP_COURSES_CONTACT = {
   name: "Олександр Гаврюшенко",
@@ -271,6 +286,63 @@ export const PHD_PRICING = {
   partTime: 26000
 };
 
+export const PHD_SPECIALTIES = [
+  { code: 'С1', name: 'Економіка' },
+  { code: 'D2', name: 'Фінанси, банківська справа, страхування та фондовий ринок' },
+  { code: 'D3', name: 'Менеджмент' },
+  { code: 'D4', name: 'Публічне управління та адміністрування' },
+  { code: 'G1', name: 'Екологія' },
+  { code: 'G1', name: 'Машинобудування' },
+  { code: 'H1', name: 'Агрономія' },
+  { code: 'H2', name: 'Тваринництво' },
+  { code: 'H6', name: 'Ветеринарна медицина' },
+];
+
+export const SUBJECTS = [
+  { id: 'ukr_lit', name: 'Українська література' },
+  { id: 'foreign', name: 'Іноземна мова' },
+  { id: 'biology', name: 'Біологія' },
+  { id: 'physics', name: 'Фізика' },
+  { id: 'chemistry', name: 'Хімія' },
+  { id: 'geography', name: 'Географія' },
+];
+
+export const getCoefficientsForFaculty = (facultyId: string) => {
+  // Agricultural / Engineering
+  if (['agro', 'bio', 'eng', 'water', 'vet'].includes(facultyId)) {
+    return {
+      k1: 0.3,
+      k2: 0.3, 
+      k3: 0.2,
+      k4_max: 0.5,
+      k4_map: {
+        'ukr_lit': 0.2,
+        'foreign': 0.25,
+        'biology': 0.5, 
+        'physics': 0.4, 
+        'chemistry': 0.3,
+        'geography': 0.2
+      } as Record<string, number>
+    };
+  }
+
+  // Economics / Management (man, acc)
+  return {
+    k1: 0.35,
+    k2: 0.4,
+    k3: 0.2,
+    k4_max: 0.5,
+    k4_map: {
+      'ukr_lit': 0.2,
+      'foreign': 0.5, 
+      'biology': 0.2,
+      'physics': 0.2,
+      'chemistry': 0.2,
+      'geography': 0.4
+    } as Record<string, number>
+  };
+};
+
 // STRICT AI INSTRUCTIONS
 export const SYSTEM_INSTRUCTION = `
 Ти — розумний віртуальний помічник для абітурієнтів Дніпровського державного аграрно-економічного університету (ДДАЕУ) на вступну кампанію 2026 року.
@@ -299,6 +371,7 @@ export const SYSTEM_INSTRUCTION = `
 Менеджменту/Маркетингу та Обліку/Фінансів: 52600/18500.
 
 ДОКТОР ФІЛОСОФІЇ (PhD):
+Спеціальності: Економіка, Фінанси, Менеджмент, Публічне управління, Екологія, Машинобудування, Агрономія, Тваринництво, Ветеринарна медицина.
 Денна: 40000 грн, Заочна: 26000 грн.
 
 ПІДГОТОВЧІ КУРСИ:
@@ -313,42 +386,3 @@ export const SYSTEM_INSTRUCTION = `
 - Студентське життя: Є спортивні секції, творчі колективи, гранти.
 
 Спілкуйся українською мовою. Будь ввічливим.
-`;
-
-// Helper for coefficients
-export interface Coefficients {
-  k1: number; // Ukr Lang
-  k2: number; // Math
-  k3: number; // History
-  k4_max: number; // Max possible for K4
-  k4_map: Record<string, number>; // Map of subject ID to coefficient
-}
-
-export const SUBJECTS = [
-  { id: 'ukr_lit', name: 'Українська література' },
-  { id: 'foreign', name: 'Іноземна мова' },
-  { id: 'bio', name: 'Біологія' },
-  { id: 'geo', name: 'Географія' },
-  { id: 'phys', name: 'Фізика' },
-  { id: 'chem', name: 'Хімія' },
-];
-
-// Simplified Coefficients Map based on typical Ministry rules for these sectors
-export const SPECIALTY_COEFFICIENTS: Record<string, Coefficients> = {
-  // Agrarian / Bio / Vet (H codes)
-  'agro': { k1: 0.3, k2: 0.3, k3: 0.2, k4_max: 0.5, k4_map: { 'bio': 0.5, 'chem': 0.5, 'phys': 0.5, 'geo': 0.4, 'foreign': 0.3, 'ukr_lit': 0.25 } },
-  // Engineering / Tech (G, H codes)
-  'tech': { k1: 0.3, k2: 0.4, k3: 0.2, k4_max: 0.5, k4_map: { 'phys': 0.5, 'chem': 0.4, 'bio': 0.3, 'geo': 0.3, 'foreign': 0.3, 'ukr_lit': 0.25 } },
-  // Economic / Management (051, 07x)
-  'econ': { k1: 0.35, k2: 0.4, k3: 0.2, k4_max: 0.25, k4_map: { 'foreign': 0.25, 'geo': 0.25, 'ukr_lit': 0.2, 'bio': 0.2, 'phys': 0.2, 'chem': 0.2 } },
-  // Ecology (E2)
-  'eco': { k1: 0.3, k2: 0.3, k3: 0.2, k4_max: 0.5, k4_map: { 'bio': 0.5, 'chem': 0.5, 'geo': 0.4, 'phys': 0.4, 'foreign': 0.3, 'ukr_lit': 0.25 } },
-};
-
-// Map faculty/specialty ID to coefficient type
-export const getCoefficientsForFaculty = (facultyId: string): Coefficients => {
-  if (facultyId === 'agro' || facultyId === 'bio' || facultyId === 'vet') return SPECIALTY_COEFFICIENTS['agro'];
-  if (facultyId === 'eng' || facultyId === 'water') return SPECIALTY_COEFFICIENTS['tech'];
-  if (facultyId === 'man' || facultyId === 'acc') return SPECIALTY_COEFFICIENTS['econ'];
-  return SPECIALTY_COEFFICIENTS['agro']; // Default
-};

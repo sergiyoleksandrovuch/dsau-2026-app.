@@ -6,8 +6,8 @@ import { RegistrationForm, RegistrationSuccess } from './components/Registration
 import { GeminiChat } from './components/GeminiChat';
 import { ScoreCalculator } from './components/ScoreCalculator';
 import { DegreeLevel, UserRegistration } from './types';
-import { PHD_PRICING, SOCIAL_LINKS, ADMISSION_COMMITTEE, PREP_COURSES_CONTACT } from './constants';
-import { Menu, X, GraduationCap, BookOpen, Phone, MapPin, Globe, CheckCircle, Lightbulb, Calendar, Mail, Instagram, ExternalLink, Briefcase, Home, Award, Music, Users, Code, Trophy, Map, MessageCircle, Heart, Plane, User, BadgeCheck } from 'lucide-react';
+import { PHD_PRICING, PHD_SPECIALTIES, SOCIAL_LINKS, ADMISSION_COMMITTEE, PREP_COURSES_CONTACT, PHD_CONTACT } from './constants';
+import { Menu, X, GraduationCap, BookOpen, Phone, MapPin, Globe, CheckCircle, Lightbulb, Calendar, Mail, Instagram, ExternalLink, Briefcase, Home, Award, Music, Users, Code, Trophy, Map, MessageCircle, Heart, Plane, User, BadgeCheck, AlertTriangle } from 'lucide-react';
 import { Button } from './components/ui/Button';
 
 // --- Icons wrapper for Tiktok which is not in lucide-react (using generic music icon or SVG) ---
@@ -109,7 +109,7 @@ const Footer = () => (
             ДДАЕУ
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed">Дніпровський державний аграрно-економічний університет — провідний заклад вищої освіти України з європейськими стандартами навчання.</p>
-          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.28</p>
+          <p className="text-xs text-gray-500">© 2026 Вступна кампанія • v1.34</p>
         </div>
 
         {/* Contacts */}
@@ -324,32 +324,107 @@ const FacultiesPage = () => {
       </div>
 
       {activeTab === DegreeLevel.PHD ? (
-        <div className="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 text-center animate-in zoom-in duration-500">
-           <div className="inline-block p-4 bg-yellow-100 text-yellow-600 rounded-full mb-6 shadow-sm">
-             <GraduationCap size={48} />
+        <div className="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 animate-in zoom-in duration-500">
+           <div className="text-center mb-10">
+                <div className="inline-block p-4 bg-yellow-100 text-yellow-600 rounded-full mb-6 shadow-sm">
+                    <GraduationCap size={48} />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">Доктор філософії (PhD)</h2>
+                <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">Третій освітньо-науковий рівень вищої освіти. Підготовка здійснюється в аспірантурі університету.</p>
            </div>
-           <h2 className="text-3xl font-bold text-gray-800 mb-4">Доктор філософії (PhD)</h2>
-           <p className="text-gray-600 mb-10 max-w-lg mx-auto leading-relaxed">Третій освітньо-науковий рівень вищої освіти. Підготовка здійснюється в аспірантурі університету за ліцензованими спеціальностями.</p>
-           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-             <div className="p-8 bg-gradient-to-br from-yellow-50 to-white rounded-2xl border border-yellow-100 shadow-sm hover:shadow-md transition-shadow">
+
+           {/* Pricing Cards */}
+           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
+             <div className="p-8 bg-gradient-to-br from-yellow-50 to-white rounded-2xl border border-yellow-100 shadow-sm hover:shadow-md transition-shadow text-center">
                <p className="text-xs text-yellow-600 uppercase font-bold mb-2 tracking-wider">Денна форма</p>
                <p className="text-4xl font-black text-gray-800">{PHD_PRICING.fullTime.toLocaleString()} <span className="text-xl font-normal text-gray-500">₴</span></p>
                <p className="text-xs text-gray-400 mt-2">за один рік</p>
              </div>
-             <div className="p-8 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+             <div className="p-8 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow text-center">
                <p className="text-xs text-gray-500 uppercase font-bold mb-2 tracking-wider">Заочна форма</p>
                <p className="text-4xl font-black text-gray-700">{PHD_PRICING.partTime.toLocaleString()} <span className="text-xl font-normal text-gray-500">₴</span></p>
                <p className="text-xs text-gray-400 mt-2">за один рік</p>
              </div>
            </div>
-           <div className="mt-10 pt-8 border-t border-gray-100">
-               <p className="text-sm text-gray-500 mb-4 font-medium">Маєте питання щодо аспірантури?</p>
+
+           {/* Specialties Grid */}
+           <div className="mb-12">
+               <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">Ліцензовані спеціальності</h3>
+               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                   {PHD_SPECIALTIES.map((spec, idx) => (
+                       <div key={idx} className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-yellow-200 transition-colors">
+                           <span className="font-mono text-xs font-bold bg-white px-2 py-1 rounded border border-gray-200 text-yellow-600">{spec.code}</span>
+                           <span className="text-sm font-medium text-gray-700">{spec.name}</span>
+                       </div>
+                   ))}
+               </div>
+           </div>
+
+           {/* Staff Section */}
+           <div className="mb-12 bg-white rounded-2xl p-8 border border-yellow-200 shadow-sm">
+               <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                   <Users size={24} className="text-yellow-600"/> Відділ аспірантури
+               </h3>
+               <div className="grid md:grid-cols-2 gap-8">
+                   <div className="flex items-center gap-4">
+                       <img src={PHD_CONTACT.head.image} alt={PHD_CONTACT.head.name} className="w-20 h-20 rounded-full object-cover border-2 border-yellow-100" />
+                       <div>
+                           <p className="font-bold text-gray-800">{PHD_CONTACT.head.name}</p>
+                           <p className="text-sm text-yellow-600 font-medium">{PHD_CONTACT.head.role}</p>
+                       </div>
+                   </div>
+                   <div className="flex items-center gap-4">
+                       <img src={PHD_CONTACT.specialist.image} alt={PHD_CONTACT.specialist.name} className="w-20 h-20 rounded-full object-cover border-2 border-yellow-100" />
+                       <div>
+                           <p className="font-bold text-gray-800">{PHD_CONTACT.specialist.name}</p>
+                           <p className="text-sm text-yellow-600 font-medium">{PHD_CONTACT.specialist.role}</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           {/* Admission Conditions */}
+           <div className="bg-blue-50 rounded-2xl p-8 border border-blue-100">
+               <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                   <BookOpen size={24} className="text-blue-500"/> Умови вступу до аспірантури
+               </h3>
+               
+               <div className="grid md:grid-cols-3 gap-8 mb-8">
+                   <div>
+                       <h4 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Вимоги</h4>
+                       <p className="text-sm text-gray-600">Наявність ступеня магістра (або спеціаліста) за відповідною або спорідненою спеціальністю.</p>
+                   </div>
+                   <div>
+                       <h4 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Вступні випробування</h4>
+                       <ul className="text-sm text-gray-600 space-y-1">
+                           <li>• ЄВІ (ТЗНК + Іноземна мова)</li>
+                           <li>• Іспит зі спеціальності</li>
+                           <li>• Презентація дослідницької пропозиції</li>
+                       </ul>
+                   </div>
+                   <div>
+                       <h4 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Прохідні бали (2025)</h4>
+                       <p className="text-sm text-gray-600">
+                           Умовою допуску до вступних випробувань є успішне складання ЄВВ з методології наукових досліджень та успішне складання ЄВІ з оцінкою за кожен з його блоків не менше ніж <span className="font-bold text-blue-700">150 балів</span>.
+                       </p>
+                   </div>
+               </div>
+
+               <div className="bg-white/60 rounded-xl p-4 border border-blue-200 flex gap-3 items-start">
+                   <AlertTriangle size={20} className="text-blue-500 shrink-0 mt-0.5" />
+                   <p className="text-sm text-blue-800 italic">
+                       Зверніть увагу: правила прийому на 2026 рік будуть розроблені та затверджені найближчим часом. Інформація базується на правилах 2025 року.
+                   </p>
+               </div>
+           </div>
+
+           <div className="mt-10 pt-8 border-t border-gray-100 text-center">
                <div className="flex justify-center gap-4 flex-wrap">
-                  <a href="tel:+380561234567" className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-yellow-50 hover:border-yellow-400 hover:text-yellow-700 transition-all shadow-sm">
-                      <Phone size={18} /> Відділ аспірантури
+                  <a href={`tel:${PHD_CONTACT.phone}`} className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-yellow-50 hover:border-yellow-400 hover:text-yellow-700 transition-all shadow-sm">
+                      <Phone size={18} /> {PHD_CONTACT.phone}
                   </a>
-                  <a href="mailto:phd@dsau.dp.ua" className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-yellow-50 hover:border-yellow-400 hover:text-yellow-700 transition-all shadow-sm">
-                      <Mail size={18} /> Написати email
+                  <a href={`mailto:${PHD_CONTACT.email}`} className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-sm font-bold text-gray-700 hover:bg-yellow-50 hover:border-yellow-400 hover:text-yellow-700 transition-all shadow-sm">
+                      <Mail size={18} /> {PHD_CONTACT.email}
                   </a>
                </div>
            </div>
@@ -835,6 +910,7 @@ function App() {
                 <Route path="/courses" element={<CoursesPage />} />
                 <Route path="/important" element={<ImportantPage />} />
                 <Route path="/student-life" element={<StudentLifePage />} />
+                <Route path="/admin" element={<div className="p-10 text-center"><h1>Панель адміністратора</h1><p>Доступ обмежено. Ця сторінка в розробці (Фаза 5).</p></div>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
